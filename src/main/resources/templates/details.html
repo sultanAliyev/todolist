@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th = "http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <link type = "text/css" rel="stylesheet" th:href="@{'/css/bootstrap.css'}">
+</head>
+<body>
+
+<div class="container">
+  <div class="row mt-5">
+    <div class="col-6 mx-auto">
+      <form th:action="@{'/savetask'}" method="post" >
+        <input type="hidden" name="id" th:value="${task.getId()}">
+        <div class="mt-2">
+          <label for="name">
+            NAME:
+          </label>
+          <input type="text" class="form-control mt-2" required id = "name" name="name" th:value="${task.getName()}">
+        </div>
+        <div class="mt-2">
+          <label for="date">
+            DATE:
+          </label>
+          <input type="text" class="form-control mt-2" required id = "date" name="date" th:value="${task.getDate()}">
+        </div>
+        <div class="mt-2">
+          <label for="priority">
+            PRIORITY:
+          </label>
+          <input type="text" class="form-control mt-2" required id = "priority" name="priority" th:value="${task.getPriority()}">
+        </div>
+        <div class="mt-2">
+          <label for="priority">
+            DESCRIPTION:
+          </label>
+          <input type="text" class="form-control mt-2" required id = "description" name="description" th:value="${task.getDescription()}">
+        </div>
+        <div class="mt-2">
+          <label for="status">
+            STATUS:
+          </label>
+          <input type="text" class="form-control mt-2" required id = "status" name="status" th:value="${task.getStatus()}">
+        </div>
+        <div class="mt-2">
+          <button type="submit" name="action" value="save" class = "btn btn-success">SAVE EDIT</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+</body>
+<script type = "text/javascript" th:src="@{'/js/bootstrap.js'}"></script>
+</html>

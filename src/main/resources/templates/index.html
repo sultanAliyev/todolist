@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th = "http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <link type = "text/css" rel="stylesheet" th:href="@{'/css/bootstrap.css'}">
+</head>
+<body>
+
+<div class="container">
+  <button type="button" style="border-radius: 35px;" class="btn btn-warning btn-sm mt-4" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    + Add New
+  </button>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">New Task</h5>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-12 mx-auto">
+            <form th:action="@{'/addtask'}" method="post">
+              <div class="mt-2">
+                <label>NAME :</label>
+                <input type="text" class="form-control mt-2" required name="name">
+              </div>
+              <div class="mt-2">
+                <label>DATE : </label>
+                <input type="date" class="form-control mt-2" required name="date">
+              </div>
+              <div class="mt-2">
+                <label>PRIORITY :</label>
+                <select class="form-select" aria-label="Default select example" name="priority">
+                  <option selected>Open this select menu</option>
+                  <option value="Highest">Highest</option>
+                  <option value="Medium">Medium</option>
+                  <option value="Low">Low</option>
+                </select>
+              </div>
+              <div class="mt-2">
+                <label>DESCRIPTION :</label>
+                <input type="text" class="form-control mt-2" required name="description">
+              </div>
+              <div class="mt-2">
+                <label>STATUS :</label>
+                <input type="text" class="form-control mt-2" required name="status">
+              </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button class="btn btn-primary">Add Task</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div class="container">
+  <div class="row mt-5">
+    <div class="col-10 mx-auto">
+      <table class="table table-responsive-lg table-hover">
+        <thead class="table-light">
+        <tr>
+          <th>NAME</th>
+          <th>DATE</th>
+          <th>PRIORITY</th>
+          <th>DESCRIPTION</th>
+          <th>STATUS</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="task : ${tasks}">
+          <td th:text="${task.name}"></td>
+          <td th:text="${task.date}"></td>
+          <td th:text="${task.priority}"></td>
+          <td th:text="${task.description}"></td>
+          <td th:text="${task.status}"></td>
+          <td width="20%">
+            <a th:href="@{'/details/'+${task.getId()}}" class="btn btn-outline-primary btn-sm mb-1">EDIT</a>
+            <a class="btn btn-outline-danger btn-sm mb-1" data-bs-toggle="modal" data-bs-target="#deleteModal">DELETE TASK</a>
+          </td>
+
+
+          <!-- Modal -->
+          <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabelModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="deleteModalLabel">Are You Sure?</h5>
+                </div>
+                <div class="modal-body">
+                </div>
+                <form th:action="@{'/deletetask/'+${task.getId()}}" method="post">
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button class="btn btn-danger" >Delete Task</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+
+
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+
+</body>
+<script type = "text/javascript" th:src="@{'/js/bootstrap.js'}"></script>
+</html>
